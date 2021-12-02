@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1><p>Codigo de barras 39</p></h1>
+        <p>El codigo de barras puede tener como maxico 43 Caracteres Incluyendo los asteriscos *---*</p>
+        <p>El codigo de barras puede tener como minimo 4 Caracteres</p>
+        <p>Debe iniciar y terminar con un " * "  </p>
+        <p>Puede tener espacios en blanco y estos caracteres especiales "+" "-"  "$" "." "%" </p>
+        <form action="javascript:codigo()">
+            <label>Ingresar codigo de barras</label>
+            <input type="text" id="codigobarras" >
+            <input type="submit"  value = "ENVIAR"> <!-- onclick="codigo()"--> 
+        </form>
+        <script>
+            function codigo(){
+                    //MASO:       /(\*(([A-Z0-9])+|\-|\$|\/|\.|\+|\%|\s){4,43}\*)$/
+                    //EL BUENO : /((\*){1}([A-Z0-9]{*(|\-|\$|\/|\.|\+|\%|\s)){2,41}(\*){1})$/
+                    // EL MERO BUENO: /((\*){1}([A-Z0-9]{*|\-|\$|\/|\.|\+|\%|\s){2,41}(\*){1})$/
+                    let codigobarras = document.getElementById("codigobarras").value;
+                    const condicion = /((\*){1}([A-Z0-9]{*|\-|\$|\/|\.|\+|\%|\s){2,41}(\*){1})$/;
+                    alert(condicion.test(codigobarras));
+                    if(condicion.test(codigobarras)){
+                    localStorage.setItem('codigobarras',codigobarras);
+                    window.location="CodigoBarrasResultados.html";
+                        }else{
+                            alert("El codigo de barras no cumple con los parámetros establecidos");
+                        }            
+                    
+                
+            }
+        </script>
+    </body>
+</html>
